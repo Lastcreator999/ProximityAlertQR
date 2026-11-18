@@ -132,7 +132,7 @@ En el emulador puedes mover la ubicación con `adb emu geo fix -99.1332 19.4326`
 | `Duplicate resources` en `:app:mergeDebugResources` | Hay dos archivos con el mismo nombre y distinta extensión en una carpeta de `App_Resources/Android/src/main/res` (por ejemplo `ic_launcher.png` e `ic_launcher.webp`). Borra uno y también su copia en `platforms/android/app/src/main/res`. |
 | `adb` no se reconoce como comando | Ejecuta las dos líneas de `$env:` de la sección 4. |
 | El dispositivo sale como `unauthorized` | Acepta el aviso de depuración USB en su pantalla. |
-| `Unsupported class file major version 69` | Usa el JDK 21 y apunta `JAVA_HOME` a esa carpeta. |
+| `Unsupported class file major version 69` o `70` | Java 25 o 26 son demasiado nuevos para Gradle. Usa el JDK 17 o 21 y apunta `JAVA_HOME` a esa carpeta. |
 | `Non-ASCII characters in path` | Mueve el proyecto a `C:\proyectos`. |
 | `User denied location permission previously` | Concede el permiso con `adb shell pm grant ...` o desde los ajustes de la app. |
 | No aparece la notificación | Revisa *Ajustes > Apps > ProximityAlertQR > Notificaciones*. |

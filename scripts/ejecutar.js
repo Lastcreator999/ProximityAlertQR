@@ -46,15 +46,57 @@ if (!existe(env.ANDROID_HOME)) {
   if (sdk) env.ANDROID_HOME = sdk;
 }
 
-// ---------- Java (el que viene dentro de Android Studio) ----------
-if (!existe(env.JAVA_HOME)) {
-  const jdk = primero([
+// ---------- Java ----------
+// Gradle 8.14 solo funciona con Java 17 a 21. Con Java 25 o 26 falla con
+// "Unsupported class file major version 69/70", así que si JAVA_HOME apunta a
+// otra versión se busca un JDK compatible.
+const JAVA_MIN = 17;
+const JAVA_MAX = 21;
+
+// Lee la versión mayor del archivo "release" del JDK (0 si no se puede leer)
+function versionJava(home) {
+  try {
+    const txt = fs.readFileSync(path.join(home, 'release'), 'utf8');
+    const m = txt.match(/JAVA_VERSION="(\d+)(?:\.(\d+))?/);
+    if (!m) return 0;
+    const mayor = parseInt(m[1], 10);
+    return mayor === 1 && m[2] ? parseInt(m[2], 10) : mayor; // "1.8" -> 8
+  } catch (e) {
+    return 0;
+  }
+}
+
+function javaCompatible(home) {
+  const v = versionJava(home);
+  return v >= JAVA_MIN && v <= JAVA_MAX;
+}
+
+// En Mac, /usr/libexec/java_home -v 17 devuelve la carpeta del JDK 17 instalado
+function javaHomeMac(version) {
+  if (!esMac) return null;
+  const r = spawnSync('/usr/libexec/java_home', ['-v', version], { encoding: 'utf8' });
+  return r.status === 0 ? r.stdout.trim() : null;
+}
+
+const javaUsuario = env.JAVA_HOME;
+const respetarUsuario = existe(javaUsuario) && (javaCompatible(javaUsuario) || versionJava(javaUsuario) === 0);
+if (!respetarUsuario) {
+  if (existe(javaUsuario)) {
+    console.log(
+      'ℹ JAVA_HOME apunta a Java ' + versionJava(javaUsuario) +
+      '; Gradle necesita Java ' + JAVA_MIN + ' a ' + JAVA_MAX + '. Buscando otro JDK...'
+    );
+  }
+  const jdk = [
     esMac && '/Applications/Android Studio.app/Contents/jbr/Contents/Home',
     esMac && path.join(os.homedir(), 'Applications', 'Android Studio.app', 'Contents', 'jbr', 'Contents', 'Home'),
+    javaHomeMac('21'),
+    javaHomeMac('17'),
     esWindows && 'C:\\Program Files\\Android\\Android Studio\\jbr',
     '/opt/android-studio/jbr',
-  ]);
+  ].find((p) => existe(p) && javaCompatible(p));
   if (jdk) env.JAVA_HOME = jdk;
+  else if (!existe(javaUsuario)) delete env.JAVA_HOME;
 }
 
 // Agrega adb, el emulador y java al PATH de este proceso
