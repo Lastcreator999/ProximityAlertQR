@@ -1,0 +1,236 @@
+.page {
+  background-color: #0f172a;
+}
+
+.action-bar {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.contenedor {
+  padding: 20;
+}
+
+.tarjeta {
+  background-color: #1e293b;
+  border-radius: 20;
+  padding: 20;
+  margin-bottom: 16;
+}
+
+.tarjeta-llegada {
+  background-color: #15803d;
+  border-width: 2;
+  border-color: #4ade80;
+}
+
+.tarjeta-llegada .distancia-valor,
+.tarjeta-llegada .etiqueta,
+.tarjeta-llegada .distancia-unidad {
+  color: #f0fdf4;
+}
+
+.tarjeta-cerca {
+  background-color: #451a03;
+  border-width: 2;
+  border-color: #f59e0b;
+}
+
+.tarjeta-cerca .distancia-valor,
+.tarjeta-cerca .etiqueta {
+  color: #fbbf24;
+}
+
+.tarjeta-escaner {
+  border-width: 1;
+  border-color: #334155;
+}
+
+.etiqueta-escaner {
+  color: #38bdf8;
+  text-align: center;
+}
+
+.marco-camara {
+  margin-top: 12;
+  border-width: 3;
+  border-color: #38bdf8;
+  border-radius: 16;
+  padding: 3;
+  background-color: #000000;
+}
+
+.ayuda {
+  color: #94a3b8;
+  font-size: 13;
+  text-align: center;
+  margin: 8 0 12 0;
+}
+
+.punto {
+  width: 12;
+  height: 12;
+  border-radius: 6;
+  margin-right: 12;
+  vertical-align: middle;
+}
+
+.punto-origen {
+  background-color: #38bdf8;
+}
+
+.punto-destino {
+  background-color: #f43f5e;
+}
+
+.etiqueta {
+  color: #94a3b8;
+  font-size: 12;
+  font-weight: bold;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.destino-nombre {
+  color: #f8fafc;
+  font-size: 28;
+  font-weight: bold;
+  margin-top: 4;
+}
+
+.destino-detalle {
+  color: #94a3b8;
+  font-size: 14;
+  margin-top: 4;
+}
+
+.distancia-valor {
+  color: #38bdf8;
+  font-size: 64;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 8;
+}
+
+.distancia-unidad {
+  color: #94a3b8;
+  font-size: 16;
+  text-align: center;
+}
+
+.estado {
+  color: #cbd5e1;
+  font-size: 15;
+  text-align: center;
+  margin: 8 8 24 8;
+}
+
+.btn-principal {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 17;
+  font-weight: bold;
+  text-transform: none;
+  border-radius: 14;
+  height: 56;
+  margin-bottom: 12;
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: #38bdf8;
+  font-size: 17;
+  font-weight: bold;
+  text-transform: none;
+  border-width: 2;
+  border-color: #38bdf8;
+  border-radius: 14;
+  height: 56;
+  margin-bottom: 12;
+}
+
+.btn-peligro {
+  background-color: #e11d48;
+  color: #ffffff;
+  font-size: 17;
+  font-weight: bold;
+  text-transform: none;
+  border-radius: 14;
+  height: 56;
+  margin-bottom: 12;
+}
+
+.btn-texto {
+  background-color: transparent;
+  color: #94a3b8;
+  font-size: 15;
+  text-transform: none;
+  height: 48;
+  margin-bottom: 12;
+}
+
+.barra {
+  color: #38bdf8;
+  background-color: #334155;
+  margin-top: 12;
+  margin-bottom: 4;
+}
+
+.ruta-texto {
+  color: #38bdf8;
+  font-size: 16;
+  font-weight: bold;
+  margin-top: 6;
+  margin-bottom: 6;
+}
+
+.selector {
+  margin-bottom: 16;
+}
+
+.campo {
+  background-color: #1e293b;
+  border-radius: 16;
+  padding: 14 16;
+  margin-bottom: 8;
+}
+
+.campo-valor {
+  color: #f8fafc;
+  font-size: 20;
+  font-weight: bold;
+  margin-top: 2;
+}
+
+.btn-swap {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 24;
+  width: 56;
+  height: 56;
+  border-radius: 28;
+  margin-left: 8;
+  vertical-align: middle;
+}
+
+.mapa {
+  margin-top: 10;
+  margin-bottom: 6;
+  background-color: #1e293b;
+}
+
+.fila-qr {
+  margin-bottom: 16;
+}
+
+.btn-mitad {
+  margin: 0 4 0 4;
+  font-size: 15;
+}
+
+.camara {
+  margin: 0;
+  background-color: #000000;
+}

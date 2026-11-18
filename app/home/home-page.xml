@@ -1,0 +1,65 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:ui="@nativescript/mlkit-core"
+      navigatingTo="navigatingTo" loaded="onLoaded" unloaded="onUnloaded" class="page">
+  <ActionBar title="Alerta de Proximidad" class="action-bar" />
+  <ScrollView>
+    <StackLayout class="contenedor">
+
+      <GridLayout columns="*, auto" rows="auto, auto" class="selector">
+        <GridLayout row="0" col="0" columns="auto, *" class="campo" tap="{{ elegirOrigen }}">
+          <Label col="0" text="" class="punto punto-origen" />
+          <StackLayout col="1">
+            <Label text="ORIGEN" class="etiqueta" textWrap="true" />
+            <Label text="{{ origen }}" class="campo-valor" textWrap="true" />
+          </StackLayout>
+        </GridLayout>
+        <GridLayout row="1" col="0" columns="auto, *" class="campo" tap="{{ elegirDestino }}">
+          <Label col="0" text="" class="punto punto-destino" />
+          <StackLayout col="1">
+            <Label text="DESTINO" class="etiqueta" textWrap="true" />
+            <Label text="{{ destino }}" class="campo-valor" textWrap="true" />
+          </StackLayout>
+        </GridLayout>
+        <Button row="0" col="1" rowSpan="2" text="↕" tap="{{ intercambiar }}" class="btn-swap" />
+      </GridLayout>
+
+      <GridLayout columns="*, *" class="fila-qr">
+        <Button col="0" text="Escanear QR" tap="{{ abrirEscaner }}" class="btn-principal btn-mitad" />
+        <Button col="1" text="Escribir código" tap="{{ escribirCodigo }}" class="btn-secundario btn-mitad" />
+      </GridLayout>
+
+      <StackLayout class="tarjeta tarjeta-escaner" visibility="{{ escaneando ? 'visible' : 'collapsed' }}">
+        <Label text="ESCANEA EL QR DEL DESTINO" class="etiqueta etiqueta-escaner" textWrap="true" />
+        <StackLayout class="marco-camara">
+          <ui:MLKitView id="camara" detectionType="barcode"
+                        detection="{{ onDetection }}" height="260" class="camara" />
+        </StackLayout>
+        <Label text="Centra el código dentro del marco" class="ayuda" textWrap="true" />
+        <Button text="Cancelar" tap="{{ cerrarEscaner }}" class="btn-secundario" />
+      </StackLayout>
+
+      <StackLayout class="{{ llegada ? 'tarjeta tarjeta-llegada' : (cerca ? 'tarjeta tarjeta-cerca' : 'tarjeta') }}">
+        <Label text="{{ llegada ? 'LLEGASTE' : (cerca ? 'YA ESTÁS CERCA' : 'DISTANCIA') }}" class="etiqueta" textWrap="true" />
+        <Label text="{{ distancia }}" class="distancia-valor" />
+        <Label text="{{ 'metros · alerta a ' + radio + ' m' }}" class="distancia-unidad" />
+        <Progress value="{{ progreso }}" maxValue="100" class="barra" />
+        <Label text="{{ 'Recorrido: ' + progreso + '%' }}" class="distancia-unidad" />
+      </StackLayout>
+
+      <StackLayout class="tarjeta">
+        <Label text="RUTA MÁS CORTA" class="etiqueta" textWrap="true" />
+        <WebView id="mapa" height="300" class="mapa" />
+        <Label text="{{ ruta }}" class="ruta-texto" textWrap="true" />
+        <Label text="{{ rutaDetalle }}" class="destino-detalle" textWrap="true" />
+      </StackLayout>
+
+      <Label text="{{ estado }}" class="estado" textWrap="true" />
+
+      <Button text="{{ simulando ? 'Detener simulación' : 'Simular recorrido' }}"
+              tap="{{ alternarSimulacion }}" class="{{ simulando ? 'btn-peligro' : 'btn-principal' }}" />
+      <Button text="{{ siguiendo &amp;&amp; !simulando ? 'Detener GPS' : 'Usar GPS real' }}"
+              tap="{{ alternarGps }}" class="btn-secundario" />
+      <Button text="Simular llegada instantánea" tap="{{ simular }}" class="btn-texto" />
+
+    </StackLayout>
+  </ScrollView>
+</Page>
